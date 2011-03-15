@@ -10,16 +10,12 @@ from wtdeploy.modules import fab_python
 from wtdeploy.modules import cron
 
 
-def link_media():
-    run("ln -s %s/app/media %s/app/media_link" % (env.main_app_deploy_folder, env.deploy_folder))
-
 def remove():
     run("rm -rf %s" % env.deploy_folder)
     
 @hosts('vagrant@127.0.0.1:2222')
 # password is "vagrant"
 def create_user():
-    # Assumes that user = rambot and password = ramboFTW
     sudo("useradd -m -b /home -s /bin/bash -U -G sudo rambot -p '$6$xpoMCVx9$S.REcFqfmMASpZSgTdB4.XRqQzuVLdFBHcwuW1wDC5FbJa2qDNHE5VZ7BZgk5EQQMs30jaGfxkMhEXhRTY9zo1'")
 
 def reqs_install():

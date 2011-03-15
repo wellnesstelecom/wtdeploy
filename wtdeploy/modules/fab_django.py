@@ -12,7 +12,7 @@ import fab_python
 
 
 def svn_checkout(to_dir):
-    """ checkout scn repository into dir """
+    """ checkout svn repository into dir """
     cmd = "svn co --username %(repo_user)s --password %(repo_password)s %(repo)s" % env
     cmd = cmd + " " + to_dir
     run(cmd)
