@@ -2,7 +2,7 @@
 
 Intro
 -----
-wtdeploy is a toolkit on top of fabric to deploy django applications on ubuntu distribution using apache and mysql
+wtdeploy is a toolkit built on top of fabric, that allows you to deploy django applications on ubuntu distribution using apache and mysql
 
 Quick start
 -----------
@@ -19,7 +19,7 @@ create your fabfile as usual:
     # fabfile.py
  
     from wtdeploy import install, deploy
-    # you can import other task like backup, quick_deploy, see tasks.py for more task
+    # you can import other task like backup, quick_deploy. See tasks.py for more tasks
 
     def myhost():
 
@@ -50,7 +50,7 @@ create your fabfile as usual:
 
 configure your django project:
     
-- at the end of settings file must be imported local_settings:
+- local_settings must be imported at the end of settings file:
         
         from local_settings import *
 
