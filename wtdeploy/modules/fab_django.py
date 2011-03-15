@@ -22,7 +22,7 @@ def install(conf_folder):
 
 def copy_conf_files(conf_folder, project_dir, is_mobile=False):
     put('%s/django/app.wsgi' % conf_folder, project_dir)
-    put('%s/django/local_settings.py' % conf_folder, project_dir + "/app")
+    upload_template('%s/django/local_settings.py' % conf_folder, project_dir + "/app", context=env)
     if is_mobile:
         put('%s/django/mobile_local_settings.py' % conf_folder, project_dir + "/app")
 
@@ -69,6 +69,10 @@ def create_admin():
 
 def run_django_cmd(cmd):
     run('source env/bin/activate && python app/manage.py syncdb --noinput')
+
+def compile_locales():
+    with cd(env.deploy_folder):
+        run('source env/bin/activate && cd app/ && django-admin.py compilemessages')
 
 def start():
     pass

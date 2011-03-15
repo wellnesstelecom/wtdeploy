@@ -8,7 +8,7 @@ from fabric.contrib.files import upload_template
 from fabric.contrib.files import exists
 
 def install(conf_folder):
-   sudo("apt-get -y install python python-setuptools python2.6-dev")
+   sudo("apt-get -y install python python-setuptools")
    sudo("easy_install pip")
    sudo("pip install virtualenv")
 

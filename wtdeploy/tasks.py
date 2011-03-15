@@ -1,3 +1,4 @@
+import datetime
 import os.path
 
 from fabric.api import env, run, local, sudo, cd
@@ -12,13 +13,23 @@ from wtdeploy.modules import cron
 def link_media():
     run("ln -s %s/app/media %s/app/media_link" % (env.main_app_deploy_folder, env.deploy_folder))
 
+def remove():
+    run("rm -rf %s" % env.deploy_folder)
+    
+@hosts('vagrant@127.0.0.1:2222')
+# password is "vagrant"
+def create_user():
+    # Assumes that user = rambot and password = ramboFTW
+    sudo("useradd -m -b /home -s /bin/bash -U -G sudo rambot -p '$6$xpoMCVx9$S.REcFqfmMASpZSgTdB4.XRqQzuVLdFBHcwuW1wDC5FbJa2qDNHE5VZ7BZgk5EQQMs30jaGfxkMhEXhRTY9zo1'")
 
 def reqs_install():
-    """ install system requierements using apt-get """
-    sudo("apt-get -y install mercurial git-core subversion libjpeg62 libjpeg62-dev")
     fab_apache.install(env.local_conf_folder)
+    sudo("apt-get update && apt-get -y install pip libmysqlclient15-dev python2.6-dev mercurial git-core subversion libjpeg62 libjpeg62-dev libssl-dev")
     fab_python.install(env.local_conf_folder)
     fab_mysql.install(env.local_conf_folder)
+    run("mkdir -p $HOME/.subversion/")
+    run("""echo '[global]
+store-plaintext-passwords = yes' > $HOME/.subversion/servers""")
 
 def system_install():
     # install munin
