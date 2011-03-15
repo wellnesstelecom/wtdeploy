@@ -4,7 +4,7 @@ setup(name='wtdeploy',
       author = 'Javi Santana', 
       author_email = 'jsantana@wtelecom.es',
       description = 'django projects deploy on ubuntu',
-      version='0.1',
+      version='0.2',
       packages=['wtdeploy'],
       requires = ['fabric']
 )
