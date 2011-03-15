@@ -13,7 +13,7 @@ from wtdeploy.modules import cron
 def remove():
     run("rm -rf %s" % env.deploy_folder)
     
-@hosts('vagrant@127.0.0.1:2222')
+#@hosts('vagrant@127.0.0.1:2222')
 # password is "vagrant"
 def create_user():
     sudo("useradd -m -b /home -s /bin/bash -U -G sudo rambot -p '$6$xpoMCVx9$S.REcFqfmMASpZSgTdB4.XRqQzuVLdFBHcwuW1wDC5FbJa2qDNHE5VZ7BZgk5EQQMs30jaGfxkMhEXhRTY9zo1'")
@@ -43,8 +43,6 @@ def install_app():
     run("mkdir -p %s" % env.deploy_folder)
     fab_django.prepare_env(env.local_conf_folder, env.deploy_folder)
     update_conf()
-    if env.link_media:
-        link_media()
     deploy()
     with cd(env.deploy_folder):
         fab_django.create_admin()

@@ -9,7 +9,8 @@ Quick start
 
 **installing**
 
-    $ pip install wtdeploy
+    $ pip install -e git+git://github.com/wellnesstelecom/wtdeploy.git#egg=wtdeploy
+
 
 **configuration**
 
