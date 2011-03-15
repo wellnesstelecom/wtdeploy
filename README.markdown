@@ -18,7 +18,7 @@ create your fabfile as usual:
     # fabfile.py
  
     from wtdeploy import install, deploy
-
+    # you can import other task like backup, quick_deploy, see tasks.py for more task
 
     def myhost():
 
@@ -45,6 +45,8 @@ create your fabfile as usual:
       env.deploy_folder = "/home/deploybot/project"
       env.is_mobile = False
 
+      # put here new tasks!!
+
 configure your django project:
     
 - at the end of settings file must be imported local_settings:
@@ -53,9 +55,11 @@ configure your django project:
 
 in the target machine %(local_conf_folder)s/django/local_settings.py will be used. You can use env variables in your local_settings.py (see example)
 
-- put requirements.txt at the same level as settings.py. If you place requirements.txt in %(deploy_folder)s/django/ it will be used instead of project requirements.txt
+- put requirements.txt at the same level as settings.py. If you place requirements.txt in %(local_conf_folder)s/django/ it will be used instead of project requirements.txt
 
 see example/localhost_files to see an example configuration. You can find apache and cron example files
+
+- check if you need to change app.wsgi 
     
 
 and finally execute:
@@ -71,8 +75,6 @@ First upload changes to your repository
 deploy the changes
 
     $ fab myhost deploy
-
-
 
 
 
