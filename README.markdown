@@ -47,12 +47,13 @@ create your fabfile as usual:
 
 configure your django project:
     
-    - at the end of settings file must be imported local_settings:
+- at the end of settings file must be imported local_settings:
         
         from local_settings import *
 
-in the target machine %(deploy_folder)s/django/local_settings.py will be used
-    - put requirements.txt at the same level as settings.py. If you place requirements.txt in %(deploy_folder)s/django/ it will be used instead of project requirements.txt
+in the target machine %(local_conf_folder)s/django/local_settings.py will be used. You can use env variables in your local_settings.py (see example)
+
+- put requirements.txt at the same level as settings.py. If you place requirements.txt in %(deploy_folder)s/django/ it will be used instead of project requirements.txt
 
 see example/localhost_files to see an example configuration. You can find apache and cron example files
     
