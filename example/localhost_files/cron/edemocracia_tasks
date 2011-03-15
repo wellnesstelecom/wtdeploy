@@ -1,0 +1,11 @@
+# /etc/cron.d/anacron: crontab entries for the anacron package
+
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+APP_PATH=%(deploy_folder)s
+PYTHONPATH=%(deploy_folder)s
+DJANGO_SETTINGS_MODULE=app.settings
+MAILTO=""
+
+#* *    * * *   rambot source %(deploy_folder)s/env/bin/activate && cd %(deploy_folder)s/app && python manage.py TASK >> /tmp/mylog.log

@@ -1,0 +1,36 @@
+<VirtualHost *:80>
+	ServerAdmin jsantana@wtelecom.es
+    ServerName %(host)s
+
+	WSGIDaemonProcess %(host)s display-name=%%{GROUP} user=rambot group=rambot
+	WSGIProcessGroup %(host)s
+
+	WSGIScriptAlias / %(deploy_folder)s/app.wsgi
+
+	Alias /media/ %(deploy_folder)s/app/media/
+	<Directory %(deploy_folder)s/media/>
+		Options Indexes FollowSymLinks MultiViews
+		AllowOverride None
+		Order allow,deny
+		allow from all
+	</Directory>
+
+
+	Alias /admin_media/ %(deploy_folder)s/env/lib/python2.6/site-packages/django/contrib/admin/media/
+
+	<Directory %(deploy_folder)s/env/lib/python2.6/site-packages/django/contrib/admin/media/>
+		Options Indexes FollowSymLinks MultiViews
+		AllowOverride None
+		Order allow,deny
+		allow from all
+	</Directory>
+
+
+	ErrorLog /var/log/apache2/%(host)s.error.log
+
+	# Possible values include: debug, info, notice, warn, error, crit,
+	# alert, emerg.
+	LogLevel debug
+
+	CustomLog /var/log/apache2/%(host)s.access.log combined
+</VirtualHost>
