@@ -51,4 +51,8 @@ def get_dump(name, user, password, where):
     # todo make temporally file
     run("mysqldump -u%s -p%s %s | gzip >  /tmp/db_dump.sql.gz" % (user, password, name));
     get("/tmp/db_dump.sql.gz", where)
-    
+
+def drop_database():
+    with settings(warn_only=True):
+        run_mysql_sudo("DROP DATABASE %s" % env.database_name)
+
