@@ -102,6 +102,7 @@ def quick_deploy():
   with cd(env.deploy_folder):
     fab_django.load_fixture('youtube_regexp')
   deploy_info()
+  fab_apache.restart()
 
 def get_database_dump():
     """ download a database dump from server """
