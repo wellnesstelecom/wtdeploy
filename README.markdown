@@ -14,8 +14,8 @@ Quick start
 
 **configuration**
 
-   $ cd myproject
-   $ machine_gun init
+    $ cd myproject
+    $ machine_gun init
 
 deploy/localhost and a very basic fabfile.py will be created. Edit fabfile.py for more info
 
