@@ -19,5 +19,5 @@ setup(name='wtdeploy',
       packages=['wtdeploy', 'wtdeploy.modules'],
       scripts=['machine_gun'],
       requires = ['fabric'],
-      package_data={'wtdeploy': get_data_files('wtdeploy/base_template')}
+      package_data={'wtdeploy': ['fabfile.py.template'] + get_data_files('wtdeploy/base_template')}
 )
