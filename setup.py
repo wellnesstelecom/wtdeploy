@@ -17,6 +17,7 @@ setup(name='wtdeploy',
       url='https://github.com/wellnesstelecom/wtdeploy',
       version='0.2',
       packages=['wtdeploy', 'wtdeploy.modules'],
+      scripts=['machine_gun'],
       requires = ['fabric'],
       package_data={'wtdeploy': get_data_files('wtdeploy/base_template')}
 )
