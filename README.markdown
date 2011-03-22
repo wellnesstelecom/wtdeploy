@@ -14,39 +14,10 @@ Quick start
 
 **configuration**
 
-create your fabfile as usual:
+   $ cd myproject
+   $ machine_gun init
 
-    # fabfile.py
- 
-    from wtdeploy import install, deploy
-    # you can import other task like backup, quick_deploy. See tasks.py for more tasks
-
-    def myhost():
-
-      # host configuration, hostname and user/pass
-      env.hosts = ['localhost']
-      env.user = 'deploybot' # must be created previously
-      env.password = 'password' 
-      env.local_conf_folder = "deploy/localhost" # path where host configuraton is placed
-                                                 # see example/localhost_files
-
-      # database
-      env.database_admin = 'root' # user will be created on install task
-      env.database_admin_pass = 'root' 
-      env.database_user = 'user' # user will be created too
-      env.database_pass = 'pass'
-      env.database_name = 'database' # database is created during install
-
-      # svn 
-      env.repo_user = env.user
-      env.repo_password = env.password
-      env.repo =  "https://svn/project/trunk/" # path where app is placed (manage.py, urls.py...)
-
-      # where to put files
-      env.deploy_folder = "/home/deploybot/project"
-      env.is_mobile = False
-
-      # put here new tasks!!
+deploy/localhost and a very basic fabfile.py will be created. Edit fabfile.py for more info
 
 configure your django project:
     
