@@ -12,12 +12,8 @@ Quick start
     $ pip install -e git+git://github.com/wellnesstelecom/wtdeploy.git#egg=wtdeploy
 
 
-**configuration**
+**project configuration**
 
-    $ cd myproject
-    $ machine_gun init
-
-deploy/localhost and a very basic fabfile.py will be created. Edit fabfile.py for more info
 
 configure your django project:
     
@@ -25,18 +21,24 @@ configure your django project:
         
         from local_settings import *
 
-in the target machine %(local_conf_folder)s/django/local_settings.py will be used. You can use env variables in your local_settings.py (see example)
+- put requirements.txt at the same level as settings.py.
 
-- put requirements.txt at the same level as settings.py. If you place requirements.txt in %(local_conf_folder)s/django/ it will be used instead of project requirements.txt
+** prepare deployment files **
 
-see example/localhost_files to see an example configuration. You can find apache and cron example files
+    $ cd myproject
+    $ machine_gun init
 
-- check if you need to change app.wsgi 
+deploy/localhost folder and a very basic fabfile.py will be created. Edit fabfile.py for more info.
+
+- Edit deploy/localhost/django/local_settings.py if you need, it will be used in the host with this configuration (configuration for each host is selected in fabfile.py)
+
+- check if you need to change deploy/localhost/django/app.wsgi, virtualhost, cron files
     
 
 and finally execute:
 
     $ fab myhost install
+    $ fab myhost deploy
 
 **usage**
 
