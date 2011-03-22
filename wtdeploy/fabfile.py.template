@@ -13,6 +13,8 @@ def localhost():
   env.password = 'password' 
   env.local_conf_folder = "deploy/localhost" # path where host configuraton is placed
                                              # see example/localhost_files
+                                             #
+  env.source_folder = 'src'
 
   # database
   env.database_admin = 'root' # user will be created on install task

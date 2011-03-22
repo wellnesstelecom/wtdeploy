@@ -4,7 +4,7 @@
 # author: javi santana
 
 import sys
-from os.path import join, dirname
+from os.path import join, dirname, exists
 import wtdeploy
 from fabric.api import local, settings
 
@@ -14,12 +14,20 @@ def init():
     with settings(warn_only=True):
         local("mkdir deploy");
     wt_dir = dirname(wtdeploy.__file__)
+
     # get base template location and copy to deploy 
     base_path =  join(wt_dir, 'base_template')
-    local("cp -r %s deploy/localhost" % base_path);
+    if not exists('deploy/localhost'):
+        local("cp -r %s deploy/localhost" % base_path);
+    else:
+        print "deploy/localhost already exists"
+
     # copy fabfile
-    fabfile_path =  join(wt_dir, 'fabfile.py.template')
-    local("cp %s fabfile.py" % fabfile_path);
+    if not exists('fabfile.py'):
+        fabfile_path =  join(wt_dir, 'fabfile.py.template')
+        local("cp %s fabfile.py" % fabfile_path);
+    else:
+        print "fabfile.py already exists"
 
     print "OK"
     print "please, check deploy/localhost and fabfile.py files"

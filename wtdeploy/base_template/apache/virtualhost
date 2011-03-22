@@ -2,7 +2,7 @@
 	ServerAdmin jsantana@wtelecom.es
     ServerName %(host)s
 
-	WSGIDaemonProcess %(host)s display-name=%%{GROUP} user=rambot group=rambot
+	WSGIDaemonProcess %(host)s display-name=%%{GROUP} user=%(user)s group=%(user)s
 	WSGIProcessGroup %(host)s
 
 	WSGIScriptAlias / %(deploy_folder)s/app.wsgi

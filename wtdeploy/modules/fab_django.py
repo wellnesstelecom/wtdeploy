@@ -28,11 +28,11 @@ def copy_conf_files(conf_folder, project_dir, is_mobile=False):
 
 def create_virtualenv(conf_folder, project_dir):
     req_file = '%s/django/requirements.txt' % conf_folder
-    # if poroject has own req file upload
+    # if project has own req file upload
     if(os.path.exists(req_file)):
         put(req_file, project_dir)
     else:
-        put('src/requirements.txt', project_dir)
+        put('%s/requirements.txt' % env.source_folder, project_dir)
         
     fab_python.create_virtualenv(project_dir + "/requirements.txt", "env", project_dir)
 
