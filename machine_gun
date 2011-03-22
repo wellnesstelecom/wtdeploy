@@ -1,0 +1,40 @@
+#!/usr/bin/env python
+# -*- encoding: utf-8 -*-
+#
+# author: javi santana
+
+import sys
+from os.path import join, dirname
+import wtdeploy
+from fabric.api import local, settings
+
+def init():
+    """ initialize deploy folder and create localhost deploy """
+
+    with settings(warn_only=True):
+        local("mkdir deploy");
+    wt_dir = dirname(wtdeploy.__file__)
+    # get base template location and copy to deploy 
+    base_path =  join(wt_dir, 'base_template')
+    local("cp -r %s deploy/localhost" % base_path);
+    # copy fabfile
+    fabfile_path =  join(wt_dir, 'fabfile.py.template')
+    local("cp %s fabfile.py" % fabfile_path);
+
+    print "OK"
+    print "please, check deploy/localhost and fabfile.py files"
+
+
+def show_help():
+    print "** machine_gun, wtdeploy helper tool **"
+    print "available commands:"
+    print "\t-init: create deploy folder and a very basic fabfile.py"
+
+if __name__ == '__main__':
+    #with hide('running', 'stdout', 'stderr'):
+    if len(sys.argv) > 1:
+        cmd = sys.argv[1]
+        if cmd == "init":
+            init();
+    else:
+        show_help()
