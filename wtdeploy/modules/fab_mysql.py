@@ -52,7 +52,8 @@ def get_dump(name, user, password, where):
     run("mysqldump -u%s -p%s %s | gzip >  /tmp/db_dump.sql.gz" % (user, password, name));
     get("/tmp/db_dump.sql.gz", where)
 
-def drop_database():
-    with settings(warn_only=True):
-        run_mysql_sudo("DROP DATABASE %s" % env.database_name)
+def truncate_database(name, user, password):
+    run("mysqldump -u%s -p%s --add-drop-table --no-data %s | grep ^DROP | mysql -u%s -p%s %s" % (user, password, name, user, password, name))
 
+def import_dump(source, name, user, password):
+    run("mysql -u%s -p%s %s < %s" % (user, password, name, source))
