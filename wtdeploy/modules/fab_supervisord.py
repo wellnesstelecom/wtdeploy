@@ -13,7 +13,9 @@ def install(conf_folder):
 
 def copy_conf_files(conf_folder, deploy_folder):
     sudo("rm -rf /etc/supervisord.conf" % env)
-    sudo("ln -s %(deploy_folder)s/app/deploy/supervisord.conf /etc/supervisord.conf" % env)
+    run('mkdir -p supervisord')
+    put('%s/supervisord/supervisord.conf' % env.local_conf_folder, 'supervisord')
+    sudo("cp supervisord/supervisord.conf /etc/supervisord.conf")   
 
 def reload(services):
     """ restart services """
