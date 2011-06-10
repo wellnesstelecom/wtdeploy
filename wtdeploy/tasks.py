@@ -20,7 +20,7 @@ def create_user():
 
 def reqs_install():
     fab_apache.install(env.local_conf_folder)
-    sudo("apt-get update && apt-get -y install pip libmysqlclient15-dev python2.6-dev mercurial git-core subversion libjpeg62 libjpeg62-dev libssl-dev")
+    sudo("apt-get update && apt-get -y install libmysqlclient15-dev python2.6-dev mercurial git-core subversion libjpeg62 libjpeg62-dev libssl-dev")
     fab_python.install(env.local_conf_folder)
     fab_mysql.install(env.local_conf_folder)
     run("mkdir -p $HOME/.subversion/")
