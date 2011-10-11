@@ -5,7 +5,7 @@
 
 from fabric.api import *
 from fabric.contrib.files import upload_template
-from fabric.contrib.files import exists
+from fabric.contrib.files import exists, append
 
 
 def install(conf_folder):
@@ -21,6 +21,8 @@ def copy_conf_files(conf_folder, deploy_folder):
         upload_template('%s/apache/virtualhost_mobile' % conf_folder, 'apache2/virtualhost', context=env)
     else:
         upload_template('%s/apache/virtualhost' % conf_folder, 'apache2', context=env)
+    append(filename='/etc/apache2/envvars', text="export LANG=\"en_US.UTF-8\"", use_sudo=True)
+    append(filename='/etc/apache2/envvars', text="export LC_ALL=\"en_US.UTF-8\"", use_sudo=True)
     sudo('cp apache2/virtualhost /etc/apache2/sites-available/%(host)s' % env)
     sudo('chmod a+r /etc/apache2/sites-available/%(host)s' % env)
     if not exists('/etc/apache2/sites-enabled/00-%(host)s' % env):
