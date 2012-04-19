@@ -14,5 +14,6 @@ def install(conf_folder):
 
 def create_virtualenv(requirements_file, name, dest_dir):
     with cd(dest_dir):
-        run("pip install -E %s -r %s" % (name, requirements_file))
+        run("virtualenv %s" % name)
+        run("%s/bin/pip install -r %s" % (name, requirements_file))
 

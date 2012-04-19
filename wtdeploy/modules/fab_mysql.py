@@ -9,7 +9,7 @@ def install_mysql():
     """ ripped from http://www.muhuk.com/2010/05/how-to-install-mysql-with-fabric/
     """
     with settings(hide('warnings', 'stderr'), warn_only=True):
-        result = sudo('dpkg-query --show mysql-server')
+        result = sudo('dpkg --status mysql-server')
     if result.failed is False:
         warn('MySQL is already installed')
         return
